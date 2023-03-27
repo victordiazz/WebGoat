@@ -9,8 +9,9 @@ jobs:
     steps:
     - name: Checkout código
       uses: actions/checkout@v2
-    - name: check maven
+    - name: maven clean
       run: mvn clean
+    - name: maven instalacion
       run: mvn -DskipTests=true install
     - name: Instalar Snyk CLI
       run: npm install -g snyk
