@@ -1,5 +1,7 @@
 name: Example workflow for Gradle using Snyk
-on: push
+on: 
+  push:
+    branches: [Victor]
 jobs:
   security:
     runs-on: ubuntu-latest
