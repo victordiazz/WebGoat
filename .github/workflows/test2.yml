@@ -26,7 +26,9 @@ jobs:
         java-version: '17'
 
     - name: MVN
-      run: mvn -DskipTests=true install  
+      run: | 
+        mvn spotless:apply
+        mvn -DskipTests=true install  
 
     - name: Instalar Snyk CLI
       run: npm install -g snyk
