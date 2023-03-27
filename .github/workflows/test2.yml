@@ -8,23 +8,30 @@ jobs:
   snyk:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout código
-      uses: actions/checkout@v2
 
-    - name: Java 11
-      uses: actions/setup-java@v1
-      with:
-        #Declaramos la versión de Java deseada
-        java-version: '11'
-
+    #Comprobamos el código fuente   
+    - name: Comprobar codigo fuente
+      uses: actions/checkout@v3
+    
+    #Setup de node en el Runner
     - name: Setup de nodejs
       uses: actions/setup-node@v3
       with:
         node-version: '18'
 
+    - name: Java 17
+      uses: actions/setup-java@v1
+      with:
+        #Declaramos la versión de Java deseada
+        java-version: '17'
+
+    - name: MVN
+      run: mvn -DskipTests=true install  
+
     - name: Instalar Snyk CLI
       run: npm install -g snyk
+
     - name: Analizar vulnerabilidades
-      run: snyk code test
+      run: snyk test
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
