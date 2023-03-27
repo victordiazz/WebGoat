@@ -2,16 +2,12 @@ name: Example workflow for Gradle using Snyk
 on: 
   push:
     branches: [main]
-      secrets:
-        SNYK_TOKEN:
-          description: "contraseña"
 jobs:
   security:
     runs-on: ubuntu-latest
     steps:
-      - name: comprobacion  
-        uses: actions/checkout@master
+      - uses: actions/checkout@master
       - name: Run Snyk to check for vulnerabilities
-        uses: snyk/actions/gradle-jdk17@master
-        with:
-          Snyk_Token: ${{ secrets.SNYK_TOKEN }}
+        uses: snyk/actions/maven@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
