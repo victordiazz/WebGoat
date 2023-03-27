@@ -2,9 +2,9 @@ name: Example workflow for Gradle using Snyk
 on: 
   push:
     branches: [main]
-  secrets:
-    SNYK_TOKEN:
-      description: "contraseña"
+      secrets:
+        SNYK_TOKEN:
+          description: "contraseña"
 jobs:
   security:
     runs-on: ubuntu-latest
