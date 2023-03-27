@@ -28,12 +28,9 @@ jobs:
     - name: MVN
       run: |
         mvn spotless:apply 
-        mvn -DskipTests=true install  
-
-    - name: Instalar Snyk CLI
-      run: npm install -g snyk
-
-    - name: Analizar vulnerabilidades
-      run: snyk test
+        mvn -DskipTests=true install
+        
+    - name: Run Snyk to check for vulnerabilities
+      uses: snyk/actions/maven@master
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
