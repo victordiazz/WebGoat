@@ -1,13 +1,17 @@
-name: Example workflow for Gradle using Snyk
-on: 
+name: Integración de Snyk con GitHub
+on:
   push:
     branches: [main]
+
 jobs:
-  security:
+  snyk:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - name: Run Snyk to check for vulnerabilities
-        uses: snyk/actions/maven@master
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+    - name: Checkout código
+      uses: actions/checkout@v2
+    - name: Instalar Snyk CLI
+      run: npm install -g snyk
+    - name: Analizar vulnerabilidades
+      run: snyk test
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_API_TOKEN }}
